@@ -1,0 +1,54 @@
+thrusters=0
+old_position=100
+old_fuel=100
+old_velocity=0
+
+new_position=100
+new_velocity=0;
+new_fuel=100
+print ('P: {},  V: {},  F: {}'.format(new_position, new_velocity, new_fuel))
+i=0;
+while new_position>0:
+    if new_fuel>0:
+        print "Set thrusters(0-20): "
+        thrusters = input()
+
+        if thrusters < 0:
+            print "No thrusters(0)!"
+            thrusters = 0
+        if thrusters > 20:
+            print "Thrusters Max at 20!"
+            thrusters=20
+        if thrusters>new_fuel:
+            print "Out of fuel! Thrusters at {}".format(new_fuel)
+            thrusters=new_fuel
+    else:
+        print "No fuel!! -- The rocket is in free fall!!"
+        thrusters=0
+
+    acceleration = -10 + thrusters
+    new_position = old_position + old_velocity + acceleration * 0.5
+    new_fuel = old_fuel - thrusters
+    new_velocity = old_velocity + acceleration
+
+    old_velocity = new_velocity
+    old_position = new_position
+    old_fuel = new_fuel
+
+    if new_position>0:
+        print ('P: {},  V: {},  F: {}'.format(new_position, new_velocity, new_fuel))
+    if new_position<=0:
+        print ('P: 0,  V: {},  F: {}'.format(new_velocity, new_fuel))
+        if new_velocity<-3:
+            print "Rocket Crashed! Velocity was {}!!".format(new_velocity)
+        else:
+            print "Landing Successful!!!"
+
+
+
+
+
+
+
+
+
